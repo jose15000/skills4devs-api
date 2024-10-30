@@ -47,4 +47,4 @@ app.post("/chat", async (req) => {
   return { response: response };
 });
 
-app.get("/", () => "Hello Elysia").listen(3000);
+app.get("/", () => "Hello Elysia").listen(3000 );
