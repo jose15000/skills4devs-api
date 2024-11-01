@@ -1,27 +1,18 @@
 import { Elysia } from "elysia";
-import { conversation, input } from "./chat";
-
+import { cors } from "@elysiajs/cors";
+import { swagger } from "@elysiajs/swagger";
+import { connectToDatabase } from "./DB";
+import { signup } from "./Auth/signup";
+import { chatRoute } from "./chat/chatroute";
+import { signin } from "./Auth/signin";
 const app = new Elysia();
+await connectToDatabase();
 
-app.post("/chat", async (req) => {
-  const { prompt, userId } = (await req.body) as {
-    prompt: string;
-    userId: number;
-  };
+app.use(cors());
+app.use(swagger());
 
-  if (!conversation[userId]) {
-    conversation[userId] = [
-      {
-        role: "system",
-        content: process.env.PROMPT,
-      },
-    ];
-  }
-
-  conversation[userId].push({ role: "user", content: prompt });
-  const response = await input(prompt, userId);
-
-  return { response: response };
-});
+chatRoute(app);
+signup(app);
+signin(app);
 
 app.get("/", () => "Hello Elysia").listen(3000);

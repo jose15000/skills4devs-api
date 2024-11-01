@@ -1,12 +1,9 @@
-import dotenv from "dotenv";
 import OpenAI from "openai";
-
-dotenv.config();
 
 export const conversation: Record<string, any[]> = {};
 
 export const openai = new OpenAI({
-  apiKey: process.env.API_KEY,
+  apiKey: Bun.env.API_KEY,
 });
 
 export async function input(prompt: string, userId: number) {

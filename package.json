@@ -6,11 +6,18 @@
     "start:dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "dotenv": "^16.4.5",
+    "@elysiajs/cors": "^1.1.1",
+    "@elysiajs/swagger": "^1.1.5",
+    "@types/jsonwebtoken": "^9.0.7",
+    "bcrypt": "^5.1.1",
     "elysia": "latest",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.10.0",
+    "mongoose": "^8.7.3",
     "openai": "^4.68.4"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "bun-types": "latest"
   },
   "module": "src/index.js"
