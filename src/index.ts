@@ -2,17 +2,14 @@ import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 import { swagger } from "@elysiajs/swagger";
 import { connectToDatabase } from "./DB";
-import { signup } from "./Auth/signup";
+import { authRoutes } from "./Auth";
 import { chatRoute } from "./chat/chatroute";
-import { signin } from "./Auth/signin";
-const app = new Elysia();
 await connectToDatabase();
+const app = new Elysia({ prefix: "/api" })
 
-app.use(cors());
-app.use(swagger());
-
-chatRoute(app);
-signup(app);
-signin(app);
-
-app.get("/", () => "Hello Elysia").listen(3000);
+  .use(cors())
+  .use(swagger())
+  .use(authRoutes)
+  .use(chatRoute)
+  .get("/", () => "Hello Elysia")
+  .listen(3000);
