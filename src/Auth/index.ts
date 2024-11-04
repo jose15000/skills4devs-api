@@ -1,5 +1,5 @@
 import { Elysia, t } from "elysia";
-import bcrypt from "bcrypt";
+
 import { User } from "../../models/user";
 import jwt from "jsonwebtoken";
 
@@ -16,7 +16,7 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
       const user = await User.findOne({ email });
 
       if (!user) {
-        const newPassword = await bcrypt.hash(password, 10);
+        const newPassword = await Bun.password.hash(password);
         const newUser = await new User({ name, email, password: newPassword });
         await newUser.save();
       } else {
@@ -45,7 +45,7 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
         return { message: "Invalid credentials." };
       }
 
-      const checkPassword = await bcrypt.compare(password, user.password);
+      const checkPassword = await Bun.password.verify(password, user.password);
 
       if (!checkPassword) {
         return { message: "Invalid credentials" };
