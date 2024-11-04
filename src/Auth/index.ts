@@ -12,6 +12,13 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
       name: string;
     };
 
+    {
+      body: t.Object({
+        email: t.String(),
+        password: t.String(),
+      });
+    }
+
     try {
       const user = await User.findOne({ email });
 
