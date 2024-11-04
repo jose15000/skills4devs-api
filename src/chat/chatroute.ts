@@ -1,7 +1,7 @@
 import Elysia from "elysia";
 import { conversation, input } from ".";
 
-export const chatRoute = new Elysia({ prefix: "/chat" }).post(
+export const chatRoute = new Elysia({ prefix: "/interviews" }).post(
   "/chat",
   async (req) => {
     const { prompt, userId } = (await req.body) as {

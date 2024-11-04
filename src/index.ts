@@ -5,8 +5,7 @@ import { connectToDatabase } from "./DB";
 import { authRoutes } from "./Auth";
 import { chatRoute } from "./chat/chatroute";
 await connectToDatabase();
-const app = new Elysia({ prefix: "/api" })
-
+new Elysia({ prefix: "/api" })
   .use(cors())
   .use(swagger())
   .use(authRoutes)
