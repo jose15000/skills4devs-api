@@ -3,7 +3,7 @@ import { cors } from "@elysiajs/cors";
 import { swagger } from "@elysiajs/swagger";
 import { connectToDatabase } from "./DB";
 import { authRoutes } from "./Auth";
-import { chatRoute } from "./chat/chatroute";
+import { chatRoute } from "./chat/chatRoute";
 await connectToDatabase();
 new Elysia()
   .use(cors())
