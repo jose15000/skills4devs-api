@@ -11,6 +11,7 @@ export const chatRoute = new Elysia({ prefix: "/interviews" }).post(
       const response = runConversation(input);
       return response;
     } catch (error) {
+      console.log(error);
       return error;
     }
   }
